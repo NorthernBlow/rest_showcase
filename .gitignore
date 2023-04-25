@@ -1,5 +1,18 @@
 env/
 rest_showcase/core/core/__pycache__/
 rest_showcase/core/db.sqlite3
-
+/..gitignore.kate.swp
+/.idea
+/core/.coverage
+/core/..db.sqlite3
+/core/htmlcov/
+/core/db.sqlite3
+/core/northern_label/migrations
+/core/northern_label/__pycache__
+/core/core/__pycache__
+core/core/static/css
+core/core/static/js
+/core/staticfiles/
+/core/media/content/album_images/20221102/
+/core/media/content/
 

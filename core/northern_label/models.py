@@ -40,7 +40,7 @@ class Release(models.Model):
     description = models.TextField(max_length=1000, default='', blank='false')
     category_by_artists = models.ForeignKey(Artists, on_delete=models.CASCADE, null=True, blank=True)
     image = models.ImageField(upload_to='content/album_images/%Y%m%d/', blank=True)
-
+  
 ## называем по-человечески модель.
     class Meta:
         verbose_name_plural = 'Релизы'
