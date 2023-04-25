@@ -1,0 +1,1 @@
+-e git+https://github.com/encode/django-rest-framework.git@3.14.0#egg=django_rest_framework
