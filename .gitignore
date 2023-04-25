@@ -1,0 +1,5 @@
+env/
+rest_showcase/core/core/__pycache__/
+rest_showcase/core/db.sqlite3
+
+
