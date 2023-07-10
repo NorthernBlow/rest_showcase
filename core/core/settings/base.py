@@ -1,8 +1,15 @@
 from pathlib import Path
+from os import environ
+from os.path import join, dirname
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-wizn!b_&pm_+01@$jt9h$x(ea8ll8x9av#ab$-$y07t-+dlfz@'
+DOTENV_PATH = join(dirname(__file__), '.env')
+load_dotenv(DOTENV_PATH)
+SECRET_KEY = environ.get('SECRET_KEY')
+
+#SECRET_KEY = 'django-insecure-wizn!b_&pm_+01@$jt9h$x(ea8ll8x9av#ab$-$y07t-+dlfz@'
 
 DEBUG = True
 

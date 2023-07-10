@@ -15,4 +15,5 @@ core/core/static/js
 /core/staticfiles/
 /core/media/content/album_images/20221102/
 /core/media/content/
-
+/core/core/settings/.env
+/core/core/settings/__pycache__
