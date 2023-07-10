@@ -6,8 +6,6 @@ SECRET_KEY = 'django-insecure-wizn!b_&pm_+01@$jt9h$x(ea8ll8x9av#ab$-$y07t-+dlfz@
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -52,12 +50,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+
 
 
 
