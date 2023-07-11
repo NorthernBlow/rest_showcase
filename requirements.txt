@@ -1,1 +1,12 @@
--e git+https://github.com/encode/django-rest-framework.git@3.14.0#egg=djangorestframework
+asgiref==3.7.2
+Django==4.2.3
+-e git+https://github.com/encode/django-rest-framework.git@2da473c8c8e024e80c13a624782f1da6272812da#egg=djangorestframework
+iniconfig==2.0.0
+packaging==23.1
+Pillow==10.0.0
+pluggy==1.2.0
+pytest==7.4.0
+pytest-django==4.5.2
+python-dotenv==1.0.0
+pytz==2023.3
+sqlparse==0.4.4

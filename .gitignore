@@ -16,4 +16,9 @@ core/core/static/js
 /core/media/content/album_images/20221102/
 /core/media/content/
 /core/core/settings/.env
-/core/core/settings/__pycache__
+/core/core/settings/__pycache__/
+**__pycache__/
+/core/.pytest_cache/
+.pytest_cache
+db.sqlite3
+.coverage
