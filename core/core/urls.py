@@ -5,7 +5,7 @@ from northern_label.views import CategoryAPIView
 
 
 #router = DefaultRouter()
-#router.register(r'category', CategoryAPIView)
+#router.register()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
