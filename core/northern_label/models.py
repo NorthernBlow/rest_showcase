@@ -41,7 +41,7 @@ class Category(MPTTModel):
 class Brand(models.Model):
     name = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100, unique=True)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='subcategories', null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='brands', null=True, blank=True)
 
 
     class Meta:

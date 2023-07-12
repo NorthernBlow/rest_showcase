@@ -7,16 +7,16 @@ from northern_label.models import Category, Brand, Product
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
-        fields = 'slug', 'name', 'category'
+        fields = ['name', 'slug', 'category']
 
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    subcategories = BrandSerializer(many=True, read_only=True)
+    brands = BrandSerializer(many=True, read_only=True)
 	
     class Meta:
         model = Category
-        fields = "__all__"
+        fields = ['name', 'slug', 'photo', 'brands']
 
 
 class ProductSerializer(serializers.ModelSerializer):
