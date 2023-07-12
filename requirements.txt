@@ -1,5 +1,7 @@
 asgiref==3.7.2
 Django==4.2.3
+django-js-asset==2.1.0
+django-mptt==0.14.0
 -e git+https://github.com/encode/django-rest-framework.git@2da473c8c8e024e80c13a624782f1da6272812da#egg=djangorestframework
 iniconfig==2.0.0
 packaging==23.1

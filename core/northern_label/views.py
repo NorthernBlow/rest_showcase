@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from northern_label.models import Artists
+from northern_label.models import Category
 from rest_framework import generics
-from northern_label.serializers import ArtistsSerializer
+from northern_label.serializers import CategorySerializer
 
-class ArtistsAPIView(generics.ListAPIView):
-	queryset = Artists.objects.all()
-	serializer_class = ArtistsSerializer
+class CategoryAPIView(generics.ListAPIView):
+	queryset = Category.objects.all()
+	serializer_class = CategorySerializer
 

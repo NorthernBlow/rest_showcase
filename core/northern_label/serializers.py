@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from northern_label.models import Artists
+from northern_label.models import Category
 
-class ArtistsSerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
 	class Meta:
-		model = Artists
+		model = Category
 		fields = ('name', 'description')
