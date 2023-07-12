@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from northern_label.views import ArtistsAPIView
+from northern_label.views import CategoryAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/artistslist/', ArtistsAPIView.as_view())
+    path('api/v1/categorylist/', CategoryAPIView.as_view())
 ]

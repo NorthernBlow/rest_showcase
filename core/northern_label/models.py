@@ -1,16 +1,22 @@
+from enum import unique
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.urls import reverse
+from mptt.models import MPTTModel, TreeForeignKey
+
 
 
 ## категории товаров
-class Artists(models.Model):
+class Category(MPTTModel):
     name = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, unique=True)
     photo = models.ImageField(upload_to='content/images/%Y%m%d/', blank=True)
-    is_published = models.BooleanField(default=True)
-    description = models.CharField(max_length=255, blank=True)
+    parent = TreeForeignKey("self", on_delete=models.PROTECT, null=True, blank=True)
+
+
+    class MPTTMeta:
+        order_insertion_by = ['name']
 
 
 ## objects - менеджер, который занимается обработкой данных в модели. в данном случае забираем из нее все поля.
@@ -19,8 +25,8 @@ class Artists(models.Model):
         return Category.objects.all()
 
     class Meta:
-        verbose_name_plural = 'Музыкальные исполнители'
-        verbose_name = 'Музыкальный исполнитель'
+        verbose_name_plural = 'Категории'
+        verbose_name = 'Категория'
 
     #вместо QuerySet названия объекта используем метод для строкового представления объекта
     def __str__(self):
@@ -32,19 +38,35 @@ class Artists(models.Model):
 
 
 
+class Brand(models.Model):
+    name = models.CharField(max_length=100, db_index=True)
+    slug = models.SlugField(max_length=100, unique=True)
+
+
+    class Meta:
+        verbose_name_plural = 'Бренды'
+        verbose_name = 'Бренд'
+
+
+    def __str__(self):
+        return self.name
+
+
+
 ## продавцы
-class Release(models.Model):
-    release_name = models.CharField(max_length=255, db_index=True)
-    title = models.CharField(max_length=255, default='Релиз', blank=False)
+class Product(models.Model):
+    product_name = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, unique=True)
-    description = models.TextField(max_length=1000, default='', blank='false')
-    category_by_artists = models.ForeignKey(Artists, on_delete=models.CASCADE, null=True, blank=True)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True)
+    category = TreeForeignKey("Category", on_delete=models.SET_NULL, null=True, blank=True)
     image = models.ImageField(upload_to='content/album_images/%Y%m%d/', blank=True)
-  
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+
 ## называем по-человечески модель.
     class Meta:
-        verbose_name_plural = 'Релизы'
-        verbose_name = 'Релиз'
+        verbose_name_plural = 'Продукты'
+        verbose_name = 'Продукт'
 
 
     def get_absolute_url(self):
@@ -54,21 +76,25 @@ class Release(models.Model):
     def register(self):
         self.save()
 
-    @staticmethod
-    def get_all_releases():
-        return Release.objects.all()
 
     @staticmethod
-    def get_releases_by_category(category_id):
+    def get_all_products():
+        return Product.objects.all()
+
+
+    @staticmethod
+    def get_products_by_category(category_id):
         if category_id:
-            return Release.objects.filter(category=category_id)
+            return Product.objects.filter(category=category_id)
         else:
-            return Release.get_all_albums()
+            return Product.get_all_products()
+
 
     def isExists(self):
-        if Release.objects.filter(release_name=self.release_name):
+        if Product.objects.filter(product_name=self.product_name):
             return True
         return False
+
 
     def __str__(self):
         return self.title
