@@ -6,7 +6,6 @@ from northern_label.models import Category, Brand, Product
 from rest_framework import generics, viewsets
 from northern_label.serializers import CategorySerializer, BrandSerializer, ProductSerializer, CategoryPagination
 from rest_framework.permissions import IsAdminUser
-from rest_framework.pagination import PageNumberPagination
 from drf_spectacular.utils import extend_schema
 
 

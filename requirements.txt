@@ -1,6 +1,8 @@
 asgiref==3.7.2
 attrs==23.1.0
 Django==4.2.3
+django-appconf==1.0.5
+django-imagekit==4.1.0
 django-js-asset==2.1.0
 django-mptt==0.14.0
 -e git+https://github.com/encode/django-rest-framework.git@2da473c8c8e024e80c13a624782f1da6272812da#egg=djangorestframework
@@ -10,6 +12,7 @@ iniconfig==2.0.0
 jsonschema==4.18.2
 jsonschema-specifications==2023.6.1
 packaging==23.1
+pilkit==2.0
 Pillow==10.0.0
 pluggy==1.2.0
 pytest==7.4.0
@@ -19,5 +22,6 @@ pytz==2023.3
 PyYAML==6.0
 referencing==0.29.1
 rpds-py==0.8.10
+six==1.16.0
 sqlparse==0.4.4
 uritemplate==4.1.1

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.pagination import PageNumberPagination
 from northern_label.models import Category, Brand, Product
-
+from PIL import Image
 
 
 class CategoryPagination(PageNumberPagination):
@@ -21,8 +21,6 @@ class BrandSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    
-
     brands = BrandSerializer(many=True, read_only=True)
 
 
@@ -33,11 +31,15 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    
-
     by_category = CategorySerializer()
+    image = serializers.ImageField(read_only=True)
+    image_small = serializers.ImageField(read_only=True)
+    image_medium = serializers.ImageField(read_only=True)
 
 
     class Meta:
         model = Product
-        fields = ['by_category', 'product_name', 'slug', 'image', 'price']
+        fields = ['by_category', 'product_name', 'slug', 'image', \
+                'image_small', 'image_medium', 'price']
+
+
