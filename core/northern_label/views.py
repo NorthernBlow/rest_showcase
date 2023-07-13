@@ -1,9 +1,13 @@
 from django.shortcuts import render
+from rest_framework import pagination
+from rest_framework.response import responses
+from rest_framework.routers import Response
 from northern_label.models import Category, Brand, Product
 from rest_framework import generics, viewsets
-from northern_label.serializers import CategorySerializer, BrandSerializer, ProductSerializer
+from northern_label.serializers import CategorySerializer, BrandSerializer, ProductSerializer, CategoryPagination
 from rest_framework.permissions import IsAdminUser
 from rest_framework.pagination import PageNumberPagination
+from drf_spectacular.utils import extend_schema
 
 
 
@@ -15,7 +19,7 @@ class CategoryAPIView(generics.ListAPIView):
     
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    pagination_class = None
+    pagination_class = CategoryPagination
 
 
 class BrandAPIView(generics.ListAPIView):
@@ -25,17 +29,22 @@ class BrandAPIView(generics.ListAPIView):
 
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
-    pagination_class = None
+    pagination_class = CategoryPagination
 
 
 
-class ProductAPIView(generics.ListAPIView):
+class ProductViewSet(viewsets.ViewSet):
     """
-    set to view all products
+    Viewset to view all products
     """
 
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    pagination_class = CategoryPagination
+
+    @extend_schema(responses=ProductSerializer)
+    def list(self, request):
+        serializer = ProductSerializer(self.queryset, many=True)
+        return Response(serializer.data)
 
 
 

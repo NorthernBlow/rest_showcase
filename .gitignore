@@ -22,3 +22,4 @@ core/core/static/js
 .pytest_cache
 db.sqlite3
 .coverage
+schema.yml
