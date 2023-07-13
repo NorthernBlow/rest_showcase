@@ -3,7 +3,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.urls import reverse
+from imagekit import processors
 from mptt.models import MPTTModel, TreeForeignKey
+from imagekit.models import ImageSpecField, ProcessedImageField
+from imagekit.processors import ResizeToFit, SmartResize
+
 
 
 
@@ -60,7 +64,13 @@ class Product(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     by_brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='subcategories', null=True, blank=True)
     by_category = TreeForeignKey("Category", on_delete=models.SET_NULL, related_name='categories', null=True, blank=True)
-    image = models.ImageField(upload_to='content/album_images/%Y%m%d/', blank=True)
+    image = models.ImageField(upload_to='content/album_images/%Y%m%d/', blank=True, null=True )
+    image_small = ImageSpecField(source='image', processors=[SmartResize(300, 300)],
+                                 format='JPG',
+                                 options={'quality': 90})
+    image_medium = ImageSpecField(source='image', processors=[SmartResize(600, 600)],
+                                  format='JPG',
+                                  options={'quality': 97})
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
 
