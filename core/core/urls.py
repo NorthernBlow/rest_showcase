@@ -1,14 +1,14 @@
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from northern_label.views import CategoryAPIView, ProductViewSet
+from northern_label.views import  CartViewSet, CategoryAPIView, ProductViewSet
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 
 
 router = DefaultRouter()
 router.register(r"product", ProductViewSet)
-
+router.register(r"cart", CartViewSet)
 
 
 urlpatterns = [
