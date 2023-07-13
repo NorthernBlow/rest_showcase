@@ -1,12 +1,22 @@
-from enum import unique
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime
 from django.urls import reverse
-from imagekit import processors
 from mptt.models import MPTTModel, TreeForeignKey
-from imagekit.models import ImageSpecField, ProcessedImageField
-from imagekit.processors import ResizeToFit, SmartResize
+from imagekit.models import ImageSpecField
+from imagekit.processors import SmartResize
+
+
+
+
+
+class User(models.Model):
+   name = models.CharField(max_length=255, null=False)
+   created_at = models.DateTimeField(auto_now_add=True)
+   updated_at = models.DateTimeField(auto_now=True)
+
+
+   def __str__(self):
+       return self.name
 
 
 
@@ -23,11 +33,6 @@ class Category(MPTTModel):
         order_insertion_by = ['name']
 
 
-## objects - менеджер, который занимается обработкой данных в модели. в данном случае забираем из нее все поля.
-    @staticmethod
-    def get_all_categories():
-        return Category.objects.all()
-
     class Meta:
         verbose_name_plural = 'Категории'
         verbose_name = 'Категория'
@@ -37,8 +42,6 @@ class Category(MPTTModel):
         return self.name
 
 
-    def get_absolute_url(self):
-        return reverse('northern_label:category_list', args=[self.slug])
 
 
 
@@ -64,7 +67,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     by_brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='subcategories', null=True, blank=True)
     by_category = TreeForeignKey("Category", on_delete=models.SET_NULL, related_name='categories', null=True, blank=True)
-    image = models.ImageField(upload_to='content/album_images/%Y%m%d/', blank=True, null=True )
+    image = models.ImageField(upload_to='content/album_images/%Y%m%d/', blank=True, null=True)
     image_small = ImageSpecField(source='image', processors=[SmartResize(300, 300)],
                                  format='JPG',
                                  options={'quality': 90})
@@ -81,3 +84,15 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+
+
+class Cart(models.Model):
+    created_by = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
+    total = models.DecimalField(max_digits=50, decimal_places=2, default=1)
+    quantity = models.IntegerField(null=False)
+    item = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
+
+
+
+
