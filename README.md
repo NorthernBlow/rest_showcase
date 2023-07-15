@@ -10,9 +10,10 @@ online showcase with basic implementation of REST architecture using Django Rest
 Для запуска приложения сгенерировать секретный ключ в джанго-консоли 
 
 ```python
+import sys
 from django.core.management.utils import get_random_secret_key
 
-print(get_random_secret_key())
+sys.stdout.write(str(get_random_secret_key()))
 ```
 
 полученный результат поместить в переменную SECRET_KEY в файле core/core/settings/.env
