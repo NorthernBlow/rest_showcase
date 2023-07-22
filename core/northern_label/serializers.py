@@ -43,6 +43,10 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 
+    def get_total_price(self, obj):
+        return obj.calculate_total_price()
+
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

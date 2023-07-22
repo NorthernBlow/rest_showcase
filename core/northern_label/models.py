@@ -95,4 +95,10 @@ class Cart(models.Model):
 
 
 
+    def calculate_total_price(self):
+        total_price = sum(product.price for product in self.item.all())
+        return total_price
+
+
+
 
