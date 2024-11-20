@@ -18,26 +18,26 @@ with open('core/core/settings/.env', 'a') as f:
 ```
 
 для генерации schema.yml:
-```
+```shell
 python core/manage.py spectacular --file schema.yml
 ```
 
 
 пример работы с API для вывода всех категорий с подкатегориями:
 
-```
+```shell
 curl -X 'GET' 'http://127.0.0.1:8000/api/v1/categorylist/'
 ```
 
 пример работы с API для вывода всех товаров:
 
-```
+```shell
 curl -X 'GET' 'http://127.0.0.1:8000/api/product/'
 ```
 
 и с пагинацией:
 
-```
+```shell
 http://127.0.0.1:8000/api/product/?page=1&page_size=1
 ```
 
