@@ -1,6 +1,3 @@
-# rest_showcase
-online showcase with basic implementation of REST architecture using Django Rest Framework
-
 Проект API интернет-магазина с использованием SwaggerUI 
 
 Перед запуском проекта установить зависимости:
