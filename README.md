@@ -13,10 +13,9 @@ online showcase with basic implementation of REST architecture using Django Rest
 import sys
 from django.core.management.utils import get_random_secret_key
 
-sys.stdout.write(str(get_random_secret_key()))
+with open('core/core/settings/.env', 'a') as f:
+   sys.stdout.write(f'SECRET_KEY={get_random_secret_key()}n')
 ```
-
-полученный результат поместить в переменную SECRET_KEY в файле core/core/settings/.env
 
 для генерации schema.yml:
 ```
